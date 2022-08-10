@@ -23,3 +23,11 @@ Widget HeadlineText({required String title, required double fontsize}) {
         fontWeight: FontWeight.bold),
   );
 }
+
+Widget SubText({required String title, required double fontsize}) {
+  return Text(
+    title,
+    style: TextStyle(
+        fontSize: fontsize, color: Colors.black, fontWeight: FontWeight.w500),
+  );
+}

@@ -1,9 +1,12 @@
+import 'package:ecommerce/Buttons.dart';
+import 'package:ecommerce/banner.dart';
+import 'package:ecommerce/pages/categories.dart';
 import 'package:ecommerce/sales_item.dart';
 import 'package:ecommerce/utilities/padding_utilities.dart';
 import 'package:ecommerce/utilities/text_utilities.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce/Buttons.dart';
-import 'package:ecommerce/banner.dart';
+
+import '../components/bottom_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -33,7 +36,26 @@ class _HomePageState extends State<HomePage> {
                   banner(),
 
                   //Navigation
-                  Navigations(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Navigation(
+                          text: 'Categories',
+                          icon: Icons.menu_rounded,
+                          widget: CategoriesPage(),
+                          context: context),
+                      Navigation(
+                          text: 'Favorites',
+                          icon: Icons.favorite_border,
+                          widget: CategoriesPage(),
+                          context: context),
+                      Navigation(
+                          text: 'Highly Rated',
+                          icon: Icons.star_border,
+                          widget: CategoriesPage(),
+                          context: context),
+                    ],
+                  ),
 
                   //Sales title
                   const SizedBox(height: 40),
@@ -77,33 +99,10 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  width: double.infinity,
-                  color: Color(0XFFEFF5FB),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      buildNavIcon(icons: Icons.home_rounded, active: true),
-                      buildNavIcon(icons: Icons.search, active: false),
-                      buildNavIcon(icons: Icons.shopping_bag, active: false),
-                      buildNavIcon(icons: Icons.person, active: false)
-                    ],
-                  )),
-            )
+            buildNav()
           ],
         ),
       ),
     );
   }
-}
-
-Widget buildNavIcon({required IconData icons, required bool active}) {
-  return Icon(
-    icons,
-    size: 25,
-    color: Color(active ? 0XFF0001FC : 0XFF0D0E15),
-  );
 }
