@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget buildNav() {
+Widget buildNav(String page) {
   return Align(
     alignment: Alignment.bottomCenter,
     child: Container(
@@ -10,10 +10,10 @@ Widget buildNav() {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            buildNavIcon(icons: Icons.home_rounded, active: true),
-            buildNavIcon(icons: Icons.search, active: false),
-            buildNavIcon(icons: Icons.shopping_bag, active: false),
-            buildNavIcon(icons: Icons.person, active: false)
+            buildNavIcon(icons: Icons.home_rounded, active: page == "home"),
+            buildNavIcon(icons: Icons.search, active: page == 'search'),
+            buildNavIcon(icons: Icons.shopping_bag, active: page == "cart"),
+            buildNavIcon(icons: Icons.person, active: page == "profile")
           ],
         )),
   );

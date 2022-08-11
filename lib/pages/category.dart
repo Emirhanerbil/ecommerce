@@ -1,10 +1,14 @@
+import 'package:ecommerce/components/bottom_nav_bar.dart';
 import 'package:ecommerce/components/header.dart';
+import 'package:ecommerce/pages/product.dart';
 import 'package:ecommerce/utilities/padding_utilities.dart';
 import 'package:ecommerce/utilities/text_utilities.dart';
 import 'package:flutter/material.dart';
 
 class CategoryPage extends StatelessWidget {
-  CategoryPage({Key? key}) : super(key: key);
+  String categoryTitle;
+  CategoryPage(this.categoryTitle);
+
   List<Map> products = [
     {
       "name": "HP Laptop",
@@ -50,7 +54,7 @@ class CategoryPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //Header
-                header("Laptop", context),
+                header(categoryTitle, context),
                 SizedBox(height: 32),
 
                 //Contents
@@ -62,42 +66,50 @@ class CategoryPage extends StatelessWidget {
                       crossAxisCount: 2,
                       children: products.map((Map product) {
                         return buildContent(product["name"], product["image"],
-                            product["price"]);
+                            product["price"], context);
                       }).toList()),
                 )
               ],
             ),
-          )
+          ),
+          buildNav("search")
         ],
       )),
     );
   }
 }
 
-Widget buildContent(String title, String photoPath, String price) {
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: 12),
-    decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(6),
-        boxShadow: [
-          BoxShadow(
-              color: Colors.black.withOpacity(0.08),
-              blurRadius: 24,
-              offset: Offset(0, 16))
-        ]),
-    child: Column(
-      children: [
-        SizedBox(height: 16),
-        Image.asset(photoPath, width: 100, height: 100),
-        SizedBox(height: 20),
-        Column(
-          children: [
-            HeadlineText(title: title, fontsize: 15),
-            SubText(title: "USD ${price}", fontsize: 14),
-          ],
-        ),
-      ],
+Widget buildContent(String title, String photoPath, String price, context) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return ProductDetailPage(title, photoPath, price);
+      }));
+    },
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 12),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(6),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.08),
+                blurRadius: 24,
+                offset: Offset(0, 16))
+          ]),
+      child: Column(
+        children: [
+          SizedBox(height: 16),
+          Image.asset(photoPath, width: 100, height: 100),
+          SizedBox(height: 20),
+          Column(
+            children: [
+              HeadlineText(title: title, fontsize: 15),
+              SubText(title: "USD ${price}", fontsize: 14),
+            ],
+          ),
+        ],
+      ),
     ),
   );
 }

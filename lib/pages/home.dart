@@ -1,6 +1,8 @@
 import 'package:ecommerce/Buttons.dart';
 import 'package:ecommerce/banner.dart';
 import 'package:ecommerce/pages/categories.dart';
+import 'package:ecommerce/pages/category.dart';
+import 'package:ecommerce/pages/product.dart';
 import 'package:ecommerce/sales_item.dart';
 import 'package:ecommerce/utilities/padding_utilities.dart';
 import 'package:ecommerce/utilities/text_utilities.dart';
@@ -67,16 +69,38 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      buildSalesItem(
-                          screenWidth: screenWidth,
-                          text: 'Phones',
-                          photodir: 'assets/images/iphone13.png',
-                          discount: '-50%'),
-                      buildSalesItem(
-                          screenWidth: screenWidth,
-                          text: 'Speakers',
-                          photodir: 'assets/images/speaker.png',
-                          discount: '-50%'),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return ProductDetailPage("IPhone 13",
+                                "assets/images/iphone13.png", "1000");
+                          }));
+                        },
+                        child: Container(
+                          child: buildSalesItem(
+                              screenWidth: screenWidth,
+                              text: 'Phones',
+                              photodir: 'assets/images/iphone13.png',
+                              discount: '-50%'),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return ProductDetailPage("JBL GO 5 ",
+                                "assets/images/speaker.png", "500");
+                          }));
+                        },
+                        child: Container(
+                          child: buildSalesItem(
+                              screenWidth: screenWidth,
+                              text: 'Speakers',
+                              photodir: 'assets/images/speaker.png',
+                              discount: '-50%'),
+                        ),
+                      ),
                     ],
                   ),
                   Row(
@@ -99,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            buildNav()
+            buildNav("home")
           ],
         ),
       ),

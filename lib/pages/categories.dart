@@ -37,7 +37,7 @@ class CategoriesPage extends StatelessWidget {
               )
             ]),
           ),
-          buildNav()
+          buildNav("search")
         ],
       )),
     );
@@ -47,7 +47,7 @@ class CategoriesPage extends StatelessWidget {
 Widget buildCategories({required String title, context}) {
   return GestureDetector(
     onTap: () => Navigator.push(
-        context, MaterialPageRoute(builder: (context) => CategoryPage())),
+        context, MaterialPageRoute(builder: (context) => CategoryPage(title))),
     child: Container(
       margin: EdgeInsets.only(bottom: 16),
       child: HeadlineText(title: title, fontsize: 16),
